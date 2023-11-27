@@ -1,20 +1,58 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, Image, useWindowDimensions } from 'react-native';
+import data from './src/data/data';
 
 export default function App() {
+  const {width: SCREEN_WIDTH} = useWindowDimensions();
+  const RenderItem = ({item, index}) =>{
+    return (
+      <View style={[styles.itemContainer, {width: SCREEN_WIDTH}]}>
+          <Image source={item.image} style={{width: SCREEN_WIDTH, height: SCREEN_WIDTH}}/>
+          <View>
+            <Text style={styles.itemTitle}>{item.title}</Text>
+            <Text style={styles.itemSubtitle}>{item.subtitle}</Text>
+          </View>
+      </View>
+    )
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <SafeAreaView style={styles.container}>
+      <FlatList data={data} renderItem={({item, index}) => {
+        return <RenderItem item={item} index={index} /> 
+      }}
+      keyExtractor={item => item.id}
+      scrollEventThrottle={16}
+      horizontal={true}
+      bounces={false}
+      pagingEnabled={true}
+      showHorizontalScrollIndicator={true}
+      />
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+   
+  itemContainer:{
     flex: 1,
-    backgroundColor: '#fff',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#0D0D0C',
+    height: '100%'
   },
+  itemTitle: {
+    color: '#AA6DFF',
+    fontSize: 40,
+    fontWeight: "700",
+    textAlign: 'center',
+    paddingHorizontal: 4,
+  },
+  itemSubtitle: {
+    color: 'rgba(249, 246, 254, 1)',
+    fontSize: 16,
+    fontWeight: "500",
+    textAlign: 'center',
+    paddingHorizontal: 20,
+  }
 });
