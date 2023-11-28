@@ -1,11 +1,4 @@
 const data = [
-    // {
-    //   id: 1,
-    //   image: require('../img/burner-logo.png'),
-    //   title: "Burner",
-    //   subtitle: "",
-    //   terms : "",  
-    // },
     {
       id: 1,
       image: require('../img/img1.png'),
