@@ -1,9 +1,9 @@
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, FlatList, Image, useWindowDimensions } from 'react-native';
 import data from './src/data/data';
 import SpotifyButton from './src/components/SpotifyButton';
 import SpotifyModal from './src/components/SpotifyModal';
-import { useState } from 'react';
 
 export default function App() {
   const { width: SCREEN_WIDTH } = useWindowDimensions();
@@ -21,7 +21,7 @@ export default function App() {
   };
 
   const openSpotify = () => {
-    // Implement the logic to open Spotify
+    // The logic to open Spotify
     console.log('Opening Spotify...');
     setSpotifyOpened(true);
     setCanProceed(true);
@@ -32,22 +32,39 @@ export default function App() {
   };
 
   const RenderItem = ({ item, index }) => {
+    const isFirstSlide = index === 0;
+
     return (
       <View style={[styles.itemContainer, { width: SCREEN_WIDTH }]}>
-        <Image source={item.image} style={{ width: SCREEN_WIDTH, height: SCREEN_WIDTH }} />
-        <View>
-          <Text style={styles.itemTitle}>{item.title}</Text>
-          <Text style={styles.itemSubtitle}>{item.subtitle}</Text>
-        </View>
-        {item.id === 1 && (
+        {isFirstSlide ? (
           <>
-            <SpotifyButton onPress={() => handleSpotifyLogin()} />
-            {modalVisible && <SpotifyModal visible={modalVisible} closeModal={closeModal} openSpotify={openSpotify} />}
+            <Image source={item.image} style={{ width: SCREEN_WIDTH, height: SCREEN_WIDTH }} />
+            <View>
+              <Text style={styles.itemTitle}>{item.title}</Text>
+              <Text style={styles.itemSubtitle}>{item.subtitle}</Text>
+            </View>
+
+              <>
+                <SpotifyButton onPress={() => handleSpotifyLogin()} />
+                {modalVisible && <SpotifyModal visible={modalVisible} closeModal={closeModal} openSpotify={openSpotify} />}
+              </>
+
+            <View style={{ alignItems: 'flex-start', justifyContent: 'flex-start', textAlign: 'left' }}>
+              <Text style={styles.itemTerms}>{item.terms}</Text>
+            </View>
+          </>
+        ) : (
+          <>
+            <View>
+            <Text style={{ ...styles.itemTitle2, width: SCREEN_WIDTH / 1.3  }}>{item.title}</Text>
+              <Text style={{...styles.itemSubtitle2, width: SCREEN_WIDTH / 1.5 }}>{item.subtitle}</Text>
+            </View>
+            <Image source={item.image} style={{ width: SCREEN_WIDTH, height: SCREEN_WIDTH }} />
+            <View style={{ alignItems: 'flex-start', justifyContent: 'flex-start', textAlign: 'left' }}>
+              <Text style={styles.itemTerms}>{item.terms}</Text>
+            </View>
           </>
         )}
-        <View style={{ alignItems: 'flex-start', justifyContent: 'flex-start', textAlign: 'left' }}>
-          <Text style={styles.itemTerms}>{item.terms}</Text>
-        </View>
       </View>
     );
   };
@@ -101,6 +118,18 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     textAlign: 'center',
     paddingHorizontal: 20,
+  },
+  itemTitle2: {
+    color: '#AA6DFF',
+    fontSize: 40,
+    fontWeight: '700',
+    textAlign: 'left',
+  },
+  itemSubtitle2: {
+    color: 'rgba(249, 246, 254, 1)',
+    fontSize: 16,
+    fontWeight: '500',
+    textAlign: 'left',
   },
   itemTerms: {
     color: 'rgba(249, 246, 254, 1)',
