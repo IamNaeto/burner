@@ -14,13 +14,13 @@ const SpotifyModal = ({ visible, closeModal, openSpotify }) => {
         <Text style={styles.modalText}>“Burner” wants to open “Spotify”</Text>
         <View style={styles.modalButtonsContainer}>
           <TouchableOpacity
-            style={{ ...styles.modalButton,  }}
+            style={{ ...styles.modalButton, }}
             onPress={closeModal}
           >
-            <Text  style={{ color: 'black' }}>Cancel</Text>
+            <Text style={{ color: 'black' }}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{ ...styles.modalButton,  }}
+            style={{ ...styles.modalButton, }}
             onPress={() => {
               openSpotify();
               closeModal();
