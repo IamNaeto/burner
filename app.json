@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./src/img/logo.png",
-      "resizeMode": "center",
+      "resizeMode": "contain",
       "backgroundColor": "#0D0D0C",
       "imagePadding": {
         "left": 50,

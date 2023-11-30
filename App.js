@@ -71,7 +71,7 @@ export default function App() {
 
 
             <Image source={item.image} style={{ width: SCREEN_WIDTH, height: SCREEN_WIDTH }} />
-            <View style={{ alignItems: 'flex-start', justifyContent: 'flex-start', textAlign: 'left' }}>
+            <View>
               <Text style={styles.itemTerms}>{item.terms}</Text>
             </View>
           </>
@@ -148,7 +148,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     textAlign: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 50,
+    marginVertical: 10,
   },
   itemTitle2: {
     color: '#AA6DFF',
